@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empleo Dev — Bogotá / Remoto · 3 nov 2026</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><rect width='8' height='8' fill='black'/><rect x='2' y='2' width='4' height='4' fill='white'/><rect x='3' y='3' width='2' height='2' fill='black'/></svg>">
+<style>
+@font-face{font-family:'Geist';src:url('https://cdn.jsdelivr.net/npm/geist@1.4.2/dist/fonts/geist-sans/Geist-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Geist';src:url('https://cdn.jsdelivr.net/npm/geist@1.4.2/dist/fonts/geist-sans/Geist-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Geist';src:url('https://cdn.jsdelivr.net/npm/geist@1.4.2/dist/fonts/geist-sans/Geist-SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Geist Mono';src:url('https://cdn.jsdelivr.net/npm/geist@1.4.2/dist/fonts/geist-mono/GeistMono-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+:root{--bg:#fafafa;--fg:#0a0a0a;--mut:#666;--line:#e5e5e5;--chip:#f0f0f0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:'Geist',Inter,-apple-system,'Segoe UI',sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:48px 20px 80px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.px{width:16px;height:16px;flex:none;background:
+  conic-gradient(from 90deg at 50% 50%,#000 90deg,transparent 0) 0 0/8px 8px,#000;
+  clip-path:polygon(0 0,100% 0,100% 37.5%,62.5% 37.5%,62.5% 62.5%,100% 62.5%,100% 100%,0 100%,0 62.5%,37.5% 62.5%,37.5% 37.5%,0 37.5%)}
+h1{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.sub{color:var(--mut);font-size:13px;margin-bottom:24px}
+.sub code{font-family:'Geist Mono',monospace;font-size:12px;background:var(--chip);padding:1px 6px}
+.filters{position:sticky;top:0;background:var(--bg);padding:12px 0;border-top:1px solid var(--fg);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;z-index:5}
+.filters input,.filters select{font:inherit;font-size:13px;color:var(--fg);background:#fff;border:1px solid var(--line);padding:7px 10px;border-radius:0;outline:none;image-rendering:pixelated}
+.filters input:focus,.filters select:focus{border-color:var(--fg)}
+.filters input{flex:1 1 200px}
+.count{font-family:'Geist Mono',monospace;font-size:12px;color:var(--mut);padding:10px 0 4px}
+.card{background:#fff;border:1px solid var(--line);padding:16px;margin-bottom:-1px}
+.card:hover{border-color:var(--fg)}
+.card h2{font-size:14px;font-weight:600;letter-spacing:-.01em;margin-bottom:2px}
+.card h2 a{color:var(--fg);text-decoration:none}
+.card h2 a:hover{text-decoration:underline}
+.co{font-size:13px;color:var(--mut);margin-bottom:8px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.tag{font-family:'Geist Mono',monospace;font-size:11px;background:var(--chip);border:1px solid var(--line);padding:2px 7px;color:#333;cursor:pointer}
+.tag.on{background:var(--fg);color:#fff;border-color:var(--fg)}
+.why{font-size:13px;color:#333}
+.why b{font-weight:600}
+.src{font-family:'Geist Mono',monospace;font-size:11px;color:var(--mut);margin-top:8px}
+.empty{padding:40px 0;color:var(--mut);text-align:center;display:none}
+footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--mut)}
+footer a{color:var(--fg)}
+@media(max-width:560px){.wrap{padding:28px 14px 60px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="px"></div><h1>empleo-dev / bogotá-remoto</h1></header>
+<p class="sub">32 ofertas · 3 nov 2026 · junior → senior · <code>sin SENA / sin pasantías</code></p>
+<div class="filters">
+<input id="q" type="search" placeholder="Buscar: java, react, n8n, remoto…" autocomplete="off">
+<select id="fFuente"><option value="">Fuente: todas</option><option>LinkedIn</option><option>Indeed</option><option>Computrabajo</option><option>elempleo</option></select>
+<select id="fMod"><option value="">Modalidad: todas</option><option>Bogotá</option><option>Híbrido</option><option>Remoto</option></select>
+<select id="fNiv"><option value="">Nivel: todos</option><option value="junior">Junior</option><option value="semi">Semi-senior</option><option value="senior">Senior</option></select>
+<select id="fOrd"><option value="rel">Orden: relevancia</option><option value="sal">Salario ↓</option></select>
+</div>
+<div class="count" id="count"></div>
+<div id="list"></div>
+<div class="empty" id="empty">∅ sin resultados — ajusta los filtros</div>
+<footer>Fuentes: LinkedIn · Indeed CO · Computrabajo CO · elempleo — vía Apify · Hecho para <a href="https://dilan-albert-murcia-parra.netlify.app/es/">dilan-albert-murcia-parra.netlify.app/es</a></footer>
+</div>
+<script>
+const JOBS=[
+{t:"Desarrollador RPA Junior",e:"INDRA COLOMBIA LTDA",m:"Remoto",c:"Indefinido",s:"",u:"https://www.elempleo.com/co/ofertas-trabajo/desarrollador-rpa-junior-1886787457",f:"elempleo",n:"junior",w:"RPA junior remoto con indefinido, tu nicho automatización."},
+{t:"Desarrollador Front Junior",e:"Empresa confidencial",m:"Híbrido",c:"Definido",s:"$8-10M",u:"https://www.elempleo.com/co/ofertas-trabajo/desarrollador-front-junior-1886783611",f:"elempleo",n:"junior",w:"Frontend junior con el mejor salario de la tanda."},
+{t:"Desarrollador(a) Front-end Junior Bogotá",e:"Empresa confidencial",m:"Híbrido",c:"Definido",s:"$10-12,5M",u:"https://www.elempleo.com/co/ofertas-trabajo/desarrolladora-frontend-junior-bogota-1886783769",f:"elempleo",n:"junior",w:"React transferible; verifica el salario en entrevista."},
+{t:"Desarrollador/a Web Junior",e:"Corp. Univ. de Asturias",m:"Bogotá",c:"Indefinido",s:"$2-2,5M",u:"https://www.elempleo.com/co/ofertas-trabajo/desarrollador-a-web-junior-1886786007",f:"elempleo",n:"junior",w:"Web junior con indefinido, barrera baja."},
+{t:"Desarrollador Backend Java",e:"NTT DATA Colombia",m:"Bogotá",c:"",s:"",u:"https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-backend-java-en-bogota-dc-8FD292C45BE6E6D761373E686DCF3405",f:"Computrabajo",n:"semi",w:"Java backend en multinacional, publicado ayer."},
+{t:"Desarrollador / Automatización",e:"Empresa del sector",m:"Bogotá",c:"",s:"$4,5M",u:"https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrolladorautomatizacion-en-bogota-dc-25F15A01A8C9EFCC61373E686DCF3405",f:"Computrabajo",n:"semi",w:"Rol mixto dev + automatización con salario publicado."},
+{t:"Desarrollador JR",e:"L&L Consultores SAS",m:"Bogotá",c:"",s:"",u:"https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-jr-en-bogota-dc-4AEFAFB63225AC2761373E686DCF3405",f:"Computrabajo",n:"junior",w:"JR genérico publicado ayer, para postular hoy."},
+{t:"Desarrollador Junior",e:"PHARI SAS",m:"Bogotá",c:"",s:"$2,2M",u:"https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-junior-en-bogota-dc-852FACA15F784A4E61373E686DCF3405",f:"Computrabajo",n:"junior",w:"Junior Bogotá con salario claro."},
+{t:"Desarrollador Azure API Management",e:"NTT DATA Colombia",m:"Bogotá",c:"",s:"",u:"https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-azure-api-management-en-bogota-dc-F697E96DCA794B1761373E686DCF3405",f:"Computrabajo",n:"semi",w:"APIs e integraciones, tu backend aplica directo."},
+{t:"Desarrollador/a Android Junior",e:"ALO CREDIT COLOMBIA",m:"Bogotá",c:"",s:"$4M",u:"https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrolladora-android-junior-contratacion-inmediata-en-bogota-dc-11A3DAE4729E808361373E686DCF3405",f:"Computrabajo",n:"junior",w:"Junior con contratación inmediata, aunque sea mobile."},
+{t:"Junior React Developer — Remote",e:"BairesDev",m:"Remoto",c:"",s:"",u:"https://www.linkedin.com/jobs/view/4485770240",f:"LinkedIn",n:"junior",w:"React remoto junior, calce directo con tu frontend."},
+{t:"Desarrollador Junior Java — No inglés",e:"Capgemini Engineering",m:"Bogotá",c:"",s:"",u:"https://www.linkedin.com/jobs/view/4484947182",f:"LinkedIn",n:"junior",w:"Java junior sin requisito de inglés."},
+{t:"Software Engineer Backend I",e:"Rappi",m:"Bogotá",c:"",s:"",u:"https://www.linkedin.com/jobs/view/4482202682",f:"LinkedIn",n:"junior",w:"Nivel I en backend, tu área prioritaria."},
+{t:"Desarrollador RPA Anywhere Junior",e:"Gamma Recruitment",m:"Bogotá",c:"",s:"",u:"https://www.linkedin.com/jobs/view/4482529675",f:"LinkedIn",n:"junior",w:"Automatización junior, tu n8n/RPA trasladable."},
+{t:"SAP Build Process Automation Dev Junior",e:"NTT DATA Europe & Latam",m:"Bogotá",c:"",s:"",u:"https://www.linkedin.com/jobs/view/4486057318",f:"LinkedIn",n:"junior",w:"Automatización de procesos junior recién publicado."},
+{t:"IT Graduate Hiring (CO)",e:"Inchcape Digital",m:"Bogotá",c:"",s:"",u:"https://www.linkedin.com/jobs/view/4484631118",f:"LinkedIn",n:"junior",w:"Programa de graduados, entrada sin ser pasantía."},
+{t:"Desarrollador Frontend Angular",e:"SETI S.A.S",m:"Bogotá",c:"",s:"",u:"https://www.linkedin.com/jobs/view/4484880935",f:"LinkedIn",n:"semi",w:"Frontend Angular, experiencia React transferible."},
+{t:"Desarrollador Backend Junior",e:"IVCISA",m:"Bogotá",c:"",s:"",u:"https://www.linkedin.com/jobs/view/4483866346",f:"LinkedIn",n:"junior",w:"Backend junior Bogotá."},
+{t:"Desarrollador Full Stack Junior",e:"AB COMERCIAL LTDA",m:"Bogotá",c:"",s:"",u:"https://co.indeed.com/viewjob?jk=3e798534e33ad5b2",f:"Indeed",n:"junior",w:"Full-stack junior con fuerza en frontend."},
+{t:"Analista Programador / Programador STD",e:"SII Group Colombia",m:"Bogotá",c:"",s:"",u:"https://www.linkedin.com/jobs/view/4484974774",f:"LinkedIn",n:"junior",w:"Nivel de entrada en consultora grande."},
+{t:"Desarrollador Backend Java — Spring Boot",e:"WORLD OFFICE COLOMBIA",m:"Híbrido",c:"Indefinido",s:"",u:"https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-backend-java-spring-boot-en-bogota-dc-27102b2adbf2fafa61373e686dcf3405",f:"Computrabajo",n:"semi",w:"Java 17+ + Spring Boot 3 + PostgreSQL, calce WhisWhim."},
+{t:"Desarrollador(a) Full Stack Angular y Node.js",e:"Colserauto SA",m:"Bogotá",c:"Tiempo completo",s:"$3,8M",u:"https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrolladora-full-stack-angular-y-nodejs-bogota-en-bogota-dc-21C04B15B08016DC61373E686DCF3405",f:"Computrabajo",n:"semi",w:"Angular + Node full-stack en Bogotá."},
+{t:"Desarrollador Full Stack Senior Java",e:"Kibernum Colombia",m:"Bogotá",c:"Tiempo completo",s:"$7,7M",u:"https://co.computrabajo.com/trabajo-de-desarrollador-java-angular",f:"Computrabajo",n:"senior",w:"Java + Angular + PL/SQL, mejor salario Bogotá."},
+{t:"Desarrollador Fullstack Java 11 + Angular",e:"NTT DATA Colombia",m:"Remoto",c:"Tiempo completo",s:"$5M",u:"https://co.computrabajo.com/trabajo-de-desarrollador-java-angular",f:"Computrabajo",n:"semi",w:"Java + Angular 100% remoto con sello NTT."},
+{t:"Desarrollador/a SemiSenior Spring Boot + Angular",e:"Asociación Profamilia",m:"Bogotá",c:"Tiempo completo",s:"",u:"https://co.computrabajo.com/trabajo-de-desarrollador-java-angular",f:"Computrabajo",n:"semi",w:"Spring Boot + Angular, barrera media."},
+{t:"Senior Java Spring Boot Developer — WFH",e:"BairesDev",m:"Remoto",c:"Full-time",s:"USD",u:"https://co.computrabajo.com/trabajo-de-desarrollador-spring-boot",f:"Computrabajo",n:"senior",w:"Spring Boot senior 100% remoto LATAM."},
+{t:"Desarrollador III Spring Boot",e:"Delta A Salud",m:"Híbrido",c:"Tiempo completo",s:"$5M",u:"https://co.computrabajo.com/trabajo-de-programador-java-spring",f:"Computrabajo",n:"semi",w:"Spring Boot salud en Bogotá híbrido."},
+{t:"Desarrollador Backend — sector financiero",e:"Michael Page Colombia",m:"Híbrido",c:"Temporal",s:"",u:"https://www.michaelpage.com.co/job-detail/desarrollador-backend/ref/jn-102026-7132011",f:"LinkedIn",n:"semi",w:"Backend banca digital, puerta al sector financiero."},
+{t:"Back-end Engineer Node.js / NestJS",e:"WiTi (vía GetOnBrd)",m:"Remoto",c:"Full-time",s:"",u:"https://www.getonbrd.com/empleos/programacion/back-end-engineer-nestjs-aws-witi-remote",f:"LinkedIn",n:"semi",w:"Node + NestJS + AWS + hexagonal, calce MeetFlow."},
+{t:"Senior AI Native Full-Stack Engineer",e:"JustInsurance LLC (vía GetOnBrd)",m:"Remoto",c:"Full-time",s:"USD 4-6k/mes",u:"https://www.getonbrd.com/jobs/machine-learning-ai/senior-ai-native-full-stack-software-engineer-justinsurance-llc-remote",f:"LinkedIn",n:"senior",w:"React + Next + Node + PG + IA en producción."},
+{t:"Desarrollador/a Full Stack Semi Senior",e:"Manpower",m:"Remoto",c:"Indefinido",s:"$5,5-6M",u:"https://www.elempleo.com/co/ofertas-empleo/trabajo-desarrollador-full-stack",f:"elempleo",n:"semi",w:"Full-stack remoto con indefinido y salario alto."},
+{t:"AI Builder / AI-Native Engineer n8n + Node",e:"Techfektor Media (vía Indeed)",m:"Remoto",c:"Full-time",s:"",u:"https://co.indeed.com/q-n8n-automation-empleos.html",f:"Indeed",n:"semi",w:"n8n + Node + agentes IA, tu nicho diferenciador."}
+];
+function salVal(s){const m=String(s||"").match(/\$([\d.,]+)/);if(!m)return -1;return parseFloat(m[1].replace(",","."));}
+function render(){
+const q=document.getElementById('q').value.toLowerCase(),
+ff=document.getElementById('fFuente').value,
+fm=document.getElementById('fMod').value,
+fn=document.getElementById('fNiv').value,
+ord=document.getElementById('fOrd').value;
+let r=JOBS.filter(j=>{
+if(ff&&j.f!==ff)return false;
+if(fm==="Bogotá"&&!/bogot/i.test(j.m))return false;
+if(fm==="Híbrido"&&j.m!=="Híbrido")return false;
+if(fm==="Remoto"&&j.m!=="Remoto")return false;
+if(fn&&j.n!==fn)return false;
+if(q&&!((j.t+" "+j.e+" "+j.m+" "+j.w).toLowerCase().includes(q)))return false;
+return true;});
+if(ord==="sal")r=r.slice().sort((a,b)=>salVal(b.s)-salVal(a.s));
+document.getElementById('count').textContent=r.length+" / "+JOBS.length+" ofertas";
+document.getElementById('empty').style.display=r.length?"none":"block";
+document.getElementById('list').innerHTML=r.map(j=>
+`<div class="card"><h2><a href="${j.u}" target="_blank" rel="noopener">${j.t}</a></h2><div class="co">${j.e}</div><div class="tags"><span class="tag">${j.m}</span>${j.c?`<span class="tag">${j.c}</span>`:""}${j.s?`<span class="tag">${j.s}</span>`:""}<span class="tag">${j.n}</span></div><div class="why"><b>Por qué encaja:</b> ${j.w}</div><div class="src">↗ ${j.f} · aplicar en pestaña nueva</div></div>`).join("");
+}
+["q","fFuente","fMod","fNiv","fOrd"].forEach(id=>{
+document.getElementById(id).addEventListener("input",render);
+document.getElementById(id).addEventListener("change",render);});
+render();
+</script>
+</body>
+</html>
